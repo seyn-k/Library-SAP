@@ -1,0 +1,50 @@
+managed implementation in class ZZCIBP_R_00BOOK_T119 unique;
+strict ( 2 );
+with draft;
+extensible;
+define behavior for ZZCIR_00BOOK_T119 alias Zzcir00bookT119
+persistent table Z00_BOOK_T
+extensible
+draft table ZZCI00BOK_T_D119
+etag master LocalLastChangedAt
+lock master total etag LastChangedAt
+authorization master( global )
+{
+  field ( readonly )
+   BookUUID,
+   CreatedBy,
+   CreatedAt,
+   LastChangedBy,
+   LastChangedAt,
+   LocalLastChangedAt;
+
+  field ( numbering : managed )
+   BookUUID;
+
+
+  create;
+  update;
+  delete;
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for Z00_BOOK_T corresponding extensible
+  {
+    BookUUID = BOOK_UUID;
+    BookID = BOOK_ID;
+    Title = TITLE;
+    Author = AUTHOR;
+    Category = CATEGORY;
+    Status = STATUS;
+    CreatedBy = CREATED_BY;
+    CreatedAt = CREATED_AT;
+    LastChangedBy = LAST_CHANGED_BY;
+    LastChangedAt = LAST_CHANGED_AT;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+  }
+
+}
